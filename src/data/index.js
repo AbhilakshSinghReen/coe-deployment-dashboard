@@ -2,25 +2,35 @@ import moment from "moment/moment";
 
 export const cardsData = [
   {
-    title: "Revenue",
-    change: 24,
-    amount: 42056,
+    title: "Total Patients Analysed",
+    change: "each",
+    amount: 2000 ,
+  },
+  // {
+  //   title: "Patients Analysed",
+  //   change: "each",
+  //   amount: 1000,
+  // },
+  {
+    title: "Breast Cancer Detected",
+    change: "each",
+    amount: 600,
   },
   {
-    title: "Orders",
-    change: -14,
-    amount: 52125.03,
+    title: "Breast Cancer Ruled Out",
+    change: "each",
+    amount: 1400,
   },
-  {
-    title: "Expenses",
-    change: 18,
-    amount: 1216.5,
-  },
-  {
-    title: "Profit",
-    change: 12,
-    amount: 10125.0,
-  },
+  // {
+  //   title: "Malignancy Rate",
+  //   change: "%",
+  //   amount: 40,
+  // },
+  // {
+  //   title: "Non-Malignancy Rate",
+  //   change: "%",
+  //   amount: 10,
+  // },
 ];
 
 export const ordersData = [

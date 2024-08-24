@@ -29,7 +29,7 @@ body {
 }
 
 .theme-container {
-  background: rgba(0, 0, 0, 0.59);
+  background: rgba(0, 0, 0, 1.0);
   border-radius: 20px;
   padding: 2rem;
 }
@@ -53,7 +53,7 @@ body {
   width: 200px;
   height: 200px;
   background: #5dc9ff;
-  filter: blur(90px);
+  filter: blur(150px);
 }
 
 .grey-container {
