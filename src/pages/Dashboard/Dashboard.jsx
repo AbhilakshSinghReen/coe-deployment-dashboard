@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import Orders from "../../Components/orders/orders";
+// import Orders from "../../Components/orders/orders";
 // import { cardsData } from '../../data';
 import css from "./Dashboard.module.css";
 // import Statstics from './Statstics/Statstics';
