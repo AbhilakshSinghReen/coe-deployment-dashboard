@@ -6,11 +6,11 @@ export const cardsData = [
     change: "each",
     amount: 2000 ,
   },
-  // {
-  //   title: "Patients Analysed",
-  //   change: "each",
-  //   amount: 1000,
-  // },
+  {
+    title: "Patients Analysed",
+    change: "each",
+    amount: 1000,
+  },
   {
     title: "Breast Cancer Detected",
     change: "each",
@@ -21,16 +21,16 @@ export const cardsData = [
     change: "each",
     amount: 1400,
   },
-  // {
-  //   title: "Malignancy Rate",
-  //   change: "%",
-  //   amount: 40,
-  // },
-  // {
-  //   title: "Non-Malignancy Rate",
-  //   change: "%",
-  //   amount: 10,
-  // },
+  {
+    title: "Malignancy Rate",
+    change: "%",
+    amount: 40,
+  },
+  {
+    title: "Non-Malignancy Rate",
+    change: "%",
+    amount: 10,
+  },
 ];
 
 export const ordersData = [
