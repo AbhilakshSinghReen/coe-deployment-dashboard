@@ -1,26 +1,62 @@
 import { useState, useEffect } from "react";
 
-// import Orders from "../../Components/orders/orders";
-// import { cardsData } from '../../data';
 import css from "./Dashboard.module.css";
-// import Statstics from './Statstics/Statstics';
 import apiClient from "../../api/apiClient";
 
 const Dashboard = () => {
+  const instituteName = "PGIMER Chandigarh";
   const [cardsData, setCardsData] = useState([]);
+  const [malignantStudiesCurrentPageNumber, setMalignantStudiesCurrentPageNumber] = useState(1);
+  const [malignantStudiesTotalPages, setMalignantStudiesTotalPages] = useState(-1);
+  const [malignantStudies, setMalignantStudies] = useState([]);
+
+  const exampleMalignantStudies = [
+    {
+      name: "Someone Someone",
+      studyDate: "12-11-2024",
+      viewerLink: "https://google.com",
+    },
+    {
+      name: "Someone Someone",
+      studyDate: "12-11-2024",
+      viewerLink: "https://google.com",
+    },
+    {
+      name: "Someone Someone",
+      studyDate: "12-11-2024",
+      viewerLink: "https://google.com",
+    },
+    {
+      name: "Someone Someone",
+      studyDate: "12-11-2024",
+      viewerLink: "https://google.com",
+    },
+  ];
 
   const getCardsDataFromApi = async () => {
-    const updatedCardsData = await apiClient.getCardsData();
+    console.log("making api request");
 
-    if (updatedCardsData.length === 0 && cardsData.length > 0) {
-      return;
+    const response = await apiClient.getCardsData();
+
+    console.log("request ok");
+
+    setCardsData([]);
+
+    if (!(response?.cardsData?.length === 0 && cardsData.length > 0)) {
+      console.log(`cardsData: ${response.cardsData.length}`);
+      setCardsData(response.cardsData);
     }
 
-    setCardsData(updatedCardsData);
+    if (!(response?.StudyList?.length === 0 && malignantStudies.length > 0)) {
+      console.log(`StudyList: ${response.StudyList.length}`);
+      console.log(response.StudyList[0]);
+      setMalignantStudies(response.StudyList);
+    }
   };
 
   useEffect(() => {
     getCardsDataFromApi();
+
     const updateCardsDataIntervalId = setInterval(getCardsDataFromApi, 60_000);
 
     return () => {
@@ -33,9 +69,9 @@ const Dashboard = () => {
       {/* left pannel */}
       <div className={css.dashboard}>
         <div className={"${css.dashboardHead} theme-container"}>
-          <div className={css.head}>
+          <div className={css.title2}>
             {/* <div className={css.durationButton}></div> */}
-            <span>CoE Mammography Dashboard</span>
+            <span>CoE Mammography Dashboard - {instituteName}</span>
           </div>
           <div className={css.cards}>
             {cardsData.map((card, index) => (
@@ -53,8 +89,45 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 
-  <Orders/> */}
+      <div className={css.dashboard}>
+        <div className={"${css.dashboardHead} theme-container"}>
+          <div className={css.headerContainer}>
+            <span className={css.title2}>Malignant Patients</span>
+
+            <div className={css.pageButtonsContainer}>
+              <span className={css.title3}>Page 1 of 1</span>
+              <div>
+                <button className={css.pageButton} disabled={true}>
+                  <span className={css.pageButtonText}>{"<"}</span>
+                </button>
+                <button className={css.pageButton} disabled={true}>
+                  <span className={css.pageButtonText}>{">"}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className={css.rowsContainer}>
+            {malignantStudies.map((study, index) => (
+              <div className={css.rowCard} key={study.viewerLink}>
+                <div className={css.cardHead}>
+                  <span className={css.rowNameText}>{study.PatientName}</span>
+                  <span className={css.rowDateText}>{`${study.StudyDate} ${study.StudyTime}`}</span>
+                </div>
+
+                <button
+                  className={css.rowButton}
+                  onClick={() =>
+                    window.open(`http://localhost:8080/viewer?StudyInstanceUIDs=${study.StudyUID}`, "_blank")
+                  }
+                >
+                  <span className={css.rowButtonText}>View</span>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
